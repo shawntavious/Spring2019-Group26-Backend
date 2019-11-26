@@ -120,8 +120,9 @@ def addall():
     quiz_places = Quiz(quiz_name='Places Quiz', details='You will be quizzed on what you learned in the places module', questions=[
                        question_house, question_museum, question_restaurant, question_city, question_restroom, question_store, question_park, question_kitchen])
     quiz_places.save()
+    module_emergencies = Module.objects.get(module_name="Emergencies")
     module_places = Module(module_name='Places', details='In this module you will learn the signs for common places', words=[
-                           house, museum, restaurant, city, restroom, store, park, kitchen], parent=ObjectId('5db21f18019bf84707b3a746'), quiz=[quiz_places])
+                           house, museum, restaurant, city, restroom, store, park, kitchen], parent=module_emergencies.id, quiz=[quiz_places])
     module_places.save()
 
     # Directions
@@ -185,7 +186,7 @@ def addall():
                            question_where, question_go, question_which, question_way, question_north, question_south, question_east, question_west, question_here, question_there, question_turn, question_left, question_right, question_straight])
     quiz_directions.save()
     module_directions = Module(module_name='Directions', details='In this module you will learn the signs for how to give directions', words=[
-                               where, go, which, way, north, south, east, west, here, there, turn, left, right, straight], quiz=[quiz_directions], parent=quiz_places.id)
+                               where, go, which, way, north, south, east, west, here, there, turn, left, right, straight], quiz=[quiz_directions], parent=module_places.id)
     module_directions.save()
 
     # Food
@@ -231,7 +232,7 @@ def addall():
     question_vegetables.save()
 
     quiz_food = Quiz(quiz_name='Food Quiz', details='You will be quizzed on what you learned in the food module', questions=[
-                     question_hungry, question_thirsty, question_eat, question_drink, question_eat, question_breakfast, question_lunch, question_dinner, question_coffee, question_meat, question_vegetables])
+                     question_hungry, question_thirsty, question_eat, question_drink, question_breakfast, question_lunch, question_dinner, question_coffee, question_meat, question_vegetables])
     quiz_food.save()
     module_food = Module(module_name='Food', details='In this Module you will learn the signs for describing food', words=[
                          hungry, thirsty, eat, drink, eat, breakfast, lunch, dinner, coffee, meat, vegetables, dinner], quiz=[quiz_food], parent=module_directions.id)
